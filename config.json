@@ -1,0 +1,5 @@
+{
+  "jwt_secret": "virtuaplex-secure-jwt-secret-change-me-in-production",
+  "server_port": "8080",
+  "static_folder": "./static"
+}

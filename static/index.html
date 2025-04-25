@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtuaplex - Virtual Movie-Going Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/webtorrent@1.9.7/webtorrent.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Virtuaplex</h1>
+            <p class="tagline">A virtual movie-going experience</p>
+        </header>
+
+        <main>
+            <div id="login-section" class="section">
+                <h2>Join a Screening</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="screening-id">Screening ID:</label>
+                        <input type="text" id="screening-id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="visitor-name">Your Name:</label>
+                        <input type="text" id="visitor-name" required>
+                    </div>
+                    <button type="submit">Join Screening</button>
+                </form>
+            </div>
+
+            <div id="theater-section" class="section hidden">
+                <div class="theater-layout">
+                    <div class="screen-container">
+                        <video id="movie-screen" controls></video>
+                        <div class="screen-label">Screen</div>
+                    </div>
+                    
+                    <div class="seats-container">
+                        <h3>Select a Seat</h3>
+                        <div id="seats-grid"></div>
+                    </div>
+                </div>
+
+                <div class="control-panel">
+                    <div class="chat-container">
+                        <h3>Theater Chat</h3>
+                        <div id="chat-messages"></div>
+                        <form id="chat-form">
+                            <input type="text" id="chat-input" placeholder="Type a message...">
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+                    
+                    <div class="visitor-list">
+                        <h3>Other Visitors</h3>
+                        <ul id="visitors-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Virtuaplex - A Virtual Movie-Going Experience</p>
+        </footer>
+    </div>
+
+    <script src="p2p-communication.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
