@@ -5,7 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtuaplex - Virtual Movie-Going Experience</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Load WebTorrent library from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/webtorrent@1.9.7/webtorrent.min.js"></script>
+    <script>
+        // Check if WebTorrent loaded correctly
+        window.addEventListener('DOMContentLoaded', function() {
+            if (typeof WebTorrent === 'undefined') {
+                console.error("WebTorrent library failed to load. Movie streaming will not work.");
+                alert("WebTorrent library failed to load. Movie streaming will not work.");
+            } else {
+                console.log("WebTorrent library loaded successfully:", WebTorrent.VERSION);
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="app-container">
@@ -15,26 +27,27 @@
         </header>
 
         <main>
-            <div id="login-section" class="section">
-                <h2>Join a Screening</h2>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="screening-id">Screening ID:</label>
-                        <input type="text" id="screening-id" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="visitor-name">Your Name:</label>
-                        <input type="text" id="visitor-name" required>
-                    </div>
-                    <button type="submit">Join Screening</button>
-                </form>
+            <div id="loading-section" class="section">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <h2>Joining Virtuaplex Theater...</h2>
+                    <p>Your movie-themed identity is being prepared...</p>
+                    <div id="loading-status"></div>
+                </div>
             </div>
 
             <div id="theater-section" class="section hidden">
+                <div class="user-info">
+                    <h3>Welcome, <span id="user-name">Movie Fan</span>!</h3>
+                </div>
+                
                 <div class="theater-layout">
                     <div class="screen-container">
                         <video id="movie-screen" controls></video>
                         <div class="screen-label">Screen</div>
+                        <div class="fallback-controls">
+                            <button id="fallback-video-btn" class="hidden">Try Direct Video</button>
+                        </div>
                     </div>
                     
                     <div class="seats-container">
