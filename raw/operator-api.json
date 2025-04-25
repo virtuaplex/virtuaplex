@@ -1,0 +1,13 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/operators/theaters",
+      "method": "GET",
+      "description": "List theaters managed by the currently authenticated operator",
+      "authentication": "Required",
+      "response": {
+        "theaters": "Array of theater objects"
+      }
+    }
+  ]
+}

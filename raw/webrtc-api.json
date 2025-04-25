@@ -1,0 +1,29 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/screenings/{id}/signal",
+      "method": "POST",
+      "description": "Exchange WebRTC signaling information",
+      "authentication": "Required (Visitor Token)",
+      "request": {
+        "type": "String (required, 'offer', 'answer', or 'ice-candidate')",
+        "payload": "Object (WebRTC signal data)",
+        "target_id": "String (optional, target visitor ID)"
+      },
+      "response": {
+        "success": "Boolean",
+        "message": "String"
+      }
+    },
+    {
+      "path": "/api/screenings/{id}/heartbeat",
+      "method": "POST",
+      "description": "Send a heartbeat to keep the seat reservation active",
+      "authentication": "Required (Visitor Token)",
+      "response": {
+        "success": "Boolean",
+        "expires_at": "Timestamp"
+      }
+    }
+  ]
+}

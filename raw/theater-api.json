@@ -1,0 +1,89 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/theaters",
+      "method": "GET",
+      "description": "List all theaters",
+      "query_params": {
+        "page": "Integer (optional, default: 1)",
+        "limit": "Integer (optional, default: 20)",
+        "sort_by": "String (optional, default: 'created_at')",
+        "order": "String (optional, default: 'desc')"
+      },
+      "response": {
+        "total": "Integer",
+        "page": "Integer",
+        "limit": "Integer",
+        "theaters": "Array of theater objects"
+      }
+    },
+    {
+      "path": "/api/theaters/{id}",
+      "method": "GET",
+      "description": "Get a specific theater by ID",
+      "response": {
+        "id": "Integer",
+        "name": "String",
+        "description": "String",
+        "capacity": "Integer",
+        "created_by": "Object (operator information)",
+        "created_at": "Timestamp",
+        "updated_at": "Timestamp",
+        "is_active": "Boolean"
+      }
+    },
+    {
+      "path": "/api/theaters",
+      "method": "POST",
+      "description": "Create a new theater",
+      "authentication": "Required (Operator)",
+      "request": {
+        "name": "String (required)",
+        "description": "String (optional)",
+        "capacity": "Integer (optional, default: 50)"
+      },
+      "response": {
+        "id": "Integer",
+        "name": "String",
+        "description": "String",
+        "capacity": "Integer",
+        "created_by": "Object (operator information)",
+        "created_at": "Timestamp",
+        "updated_at": "Timestamp",
+        "is_active": "Boolean"
+      }
+    },
+    {
+      "path": "/api/theaters/{id}",
+      "method": "PUT",
+      "description": "Update a theater",
+      "authentication": "Required (Operator)",
+      "request": {
+        "name": "String (optional)",
+        "description": "String (optional)",
+        "capacity": "Integer (optional)",
+        "is_active": "Boolean (optional)"
+      },
+      "response": {
+        "id": "Integer",
+        "name": "String",
+        "description": "String",
+        "capacity": "Integer",
+        "created_by": "Object (operator information)",
+        "created_at": "Timestamp",
+        "updated_at": "Timestamp",
+        "is_active": "Boolean"
+      }
+    },
+    {
+      "path": "/api/theaters/{id}",
+      "method": "DELETE",
+      "description": "Delete a theater",
+      "authentication": "Required (Operator)",
+      "response": {
+        "success": "Boolean",
+        "message": "String"
+      }
+    }
+  ]
+}

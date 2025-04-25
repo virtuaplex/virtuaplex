@@ -1,0 +1,47 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/auth/github",
+      "method": "GET",
+      "description": "Redirect to GitHub for OAuth authentication",
+      "response": {
+        "redirect": "GitHub OAuth URL"
+      }
+    },
+    {
+      "path": "/api/auth/github/callback",
+      "method": "GET",
+      "description": "Callback endpoint for GitHub OAuth",
+      "query_params": {
+        "code": "String (required)",
+        "state": "String (required)"
+      },
+      "response": {
+        "success": "Boolean",
+        "token": "JWT token for authentication"
+      }
+    },
+    {
+      "path": "/api/auth/logout",
+      "method": "POST",
+      "description": "Log out an operator",
+      "authentication": "Required",
+      "response": {
+        "success": "Boolean",
+        "message": "String"
+      }
+    },
+    {
+      "path": "/api/auth/me",
+      "method": "GET",
+      "description": "Get current authenticated operator's information",
+      "authentication": "Required",
+      "response": {
+        "id": "Integer",
+        "github_username": "String",
+        "github_avatar_url": "String",
+        "last_login": "Timestamp"
+      }
+    }
+  ]
+}

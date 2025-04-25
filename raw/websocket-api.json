@@ -1,0 +1,101 @@
+{
+  "websockets": [
+    {
+      "path": "/ws/screenings/{screening_id}",
+      "description": "Real-time updates for screening events and signaling",
+      "authentication": "Required (Visitor Token)",
+      "messages": {
+        "outgoing": [
+          {
+            "type": "seat_update",
+            "data": {
+              "screening_id": "Integer",
+              "row_number": "Integer",
+              "seat_number": "Integer",
+              "is_occupied": "Boolean",
+              "visitor": {
+                "id": "String (anonymous ID)",
+                "display_name": "String",
+                "avatar_color": "String"
+              },
+              "action": "String ('occupied' or 'released')"
+            }
+          },
+          {
+            "type": "webrtc_signal",
+            "data": {
+              "from": "String (sender visitor ID)",
+              "type": "String ('offer', 'answer', or 'ice-candidate')",
+              "payload": "Object (WebRTC signal data)"
+            }
+          },
+          {
+            "type": "visitor_joined",
+            "data": {
+              "visitor": {
+                "id": "String (anonymous ID)",
+                "display_name": "String",
+                "avatar_color": "String"
+              },
+              "timestamp": "Timestamp"
+            }
+          },
+          {
+            "type": "visitor_left",
+            "data": {
+              "visitor_id": "String (anonymous ID)",
+              "timestamp": "Timestamp"
+            }
+          },
+          {
+            "type": "screening_status",
+            "data": {
+              "visitor_count": "Integer",
+              "status": "String ('active', 'ending_soon', 'ended')"
+            }
+          }
+        ],
+        "incoming": [
+          {
+            "type": "select_seat",
+            "data": {
+              "row_number": "Integer",
+              "seat_number": "Integer"
+            }
+          },
+          {
+            "type": "release_seat",
+            "data": {}
+          },
+          {
+            "type": "webrtc_signal",
+            "data": {
+              "target": "String (target visitor ID)",
+              "type": "String ('offer', 'answer', or 'ice-candidate')",
+              "payload": "Object (WebRTC signal data)"
+            }
+          },
+          {
+            "type": "position_update",
+            "data": {
+              "position": {
+                "x": "Float",
+                "y": "Float",
+                "z": "Float"
+              },
+              "rotation": {
+                "x": "Float",
+                "y": "Float",
+                "z": "Float"
+              }
+            }
+          },
+          {
+            "type": "heartbeat",
+            "data": {}
+          }
+        ]
+      }
+    }
+  ]
+}

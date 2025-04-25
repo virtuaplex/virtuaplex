@@ -1,0 +1,148 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/schedules",
+      "method": "GET",
+      "description": "List all schedules",
+      "query_params": {
+        "page": "Integer (optional, default: 1)",
+        "limit": "Integer (optional, default: 20)",
+        "theater_id": "Integer (optional)",
+        "film_id": "Integer (optional)",
+        "from_date": "Date (optional)",
+        "to_date": "Date (optional)"
+      },
+      "response": {
+        "total": "Integer",
+        "page": "Integer",
+        "limit": "Integer",
+        "schedules": "Array of schedule objects"
+      }
+    },
+    {
+      "path": "/api/theaters/{theater_id}/schedules",
+      "method": "GET",
+      "description": "Get schedules for a specific theater",
+      "query_params": {
+        "page": "Integer (optional, default: 1)",
+        "limit": "Integer (optional, default: 20)",
+        "from_date": "Date (optional)",
+        "to_date": "Date (optional)"
+      },
+      "response": {
+        "total": "Integer",
+        "page": "Integer",
+        "limit": "Integer",
+        "schedules": "Array of schedule objects"
+      }
+    },
+    {
+      "path": "/api/schedules/{id}",
+      "method": "GET",
+      "description": "Get a specific schedule by ID",
+      "response": {
+        "id": "Integer",
+        "theater_id": "Integer",
+        "theater_name": "String",
+        "film_id": "Integer",
+        "film_title": "String",
+        "start_time": "Timestamp",
+        "end_time": "Timestamp",
+        "is_recurring": "Boolean",
+        "recurrence_pattern": "JSON object (if recurring)",
+        "created_by": "Object (operator information)",
+        "created_at": "Timestamp",
+        "updated_at": "Timestamp"
+      }
+    },
+    {
+      "path": "/api/schedules",
+      "method": "POST",
+      "description": "Create a new schedule",
+      "authentication": "Required (Operator)",
+      "request": {
+        "theater_id": "Integer (required)",
+        "film_id": "Integer (required)",
+        "start_time": "Timestamp (required)",
+        "end_time": "Timestamp (required)",
+        "is_recurring": "Boolean (optional, default: false)",
+        "recurrence_pattern": "JSON object (required if is_recurring is true)"
+      },
+      "response": {
+        "id": "Integer",
+        "theater_id": "Integer",
+        "theater_name": "String",
+        "film_id": "Integer",
+        "film_title": "String",
+        "start_time": "Timestamp",
+        "end_time": "Timestamp",
+        "is_recurring": "Boolean",
+        "recurrence_pattern": "JSON object (if recurring)",
+        "created_by": "Object (operator information)",
+        "created_at": "Timestamp",
+        "updated_at": "Timestamp"
+      }
+    },
+    {
+      "path": "/api/schedules/{id}",
+      "method": "PUT",
+      "description": "Update a schedule",
+      "authentication": "Required (Operator)",
+      "request": {
+        "theater_id": "Integer (optional)",
+        "film_id": "Integer (optional)",
+        "start_time": "Timestamp (optional)",
+        "end_time": "Timestamp (optional)",
+        "is_recurring": "Boolean (optional)",
+        "recurrence_pattern": "JSON object (optional)"
+      },
+      "response": {
+        "id": "Integer",
+        "theater_id": "Integer",
+        "theater_name": "String",
+        "film_id": "Integer",
+        "film_title": "String",
+        "start_time": "Timestamp",
+        "end_time": "Timestamp",
+        "is_recurring": "Boolean",
+        "recurrence_pattern": "JSON object (if recurring)",
+        "created_by": "Object (operator information)",
+        "created_at": "Timestamp",
+        "updated_at": "Timestamp"
+      }
+    },
+    {
+      "path": "/api/schedules/{id}",
+      "method": "DELETE",
+      "description": "Delete a schedule",
+      "authentication": "Required (Operator)",
+      "response": {
+        "success": "Boolean",
+        "message": "String"
+      }
+    },
+    {
+      "path": "/api/schedules/upcoming",
+      "method": "GET",
+      "description": "Get upcoming schedules",
+      "query_params": {
+        "limit": "Integer (optional, default: 10)",
+        "theater_id": "Integer (optional)"
+      },
+      "response": {
+        "schedules": "Array of schedule objects"
+      }
+    },
+    {
+      "path": "/api/schedules/now-playing",
+      "method": "GET",
+      "description": "Get currently playing movies",
+      "query_params": {
+        "theater_id": "Integer (optional)"
+      },
+      "response": {
+        "screenings": "Array of active screening objects with film and theater information"
+      }
+    }
+  ]
+}

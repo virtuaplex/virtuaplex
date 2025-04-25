@@ -1,0 +1,89 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/screenings",
+      "method": "GET",
+      "description": "List all active screenings",
+      "query_params": {
+        "theater_id": "Integer (optional)"
+      },
+      "response": {
+        "screenings": "Array of active screening objects with film and theater information"
+      }
+    },
+    {
+      "path": "/api/screenings/{id}",
+      "method": "GET",
+      "description": "Get a specific active screening by ID",
+      "response": {
+        "id": "Integer",
+        "theater_id": "Integer",
+        "theater_name": "String",
+        "film_id": "Integer",
+        "film_title": "String",
+        "film_details": "Object (film information)",
+        "start_time": "Timestamp",
+        "end_time": "Timestamp",
+        "room_code": "String",
+        "available_seats": "Integer",
+        "total_seats": "Integer",
+        "occupied_seats": "Array of seat coordinates"
+      }
+    },
+    {
+      "path": "/api/screenings/{id}/visitor",
+      "method": "POST",
+      "description": "Register as a visitor for a screening (anonymous)",
+      "request": {
+        "display_name": "String (required)",
+        "avatar_color": "String (optional, hex color)"
+      },
+      "response": {
+        "visitor_id": "String (unique anonymous ID)",
+        "display_name": "String",
+        "avatar_color": "String",
+        "screening_id": "Integer",
+        "token": "JWT token for screening access",
+        "webrtc_info": "Object (WebRTC connection details)",
+        "expires_at": "Timestamp"
+      }
+    },
+    {
+      "path": "/api/screenings/{id}/seats",
+      "method": "GET",
+      "description": "Get all seats in a screening",
+      "response": {
+        "screening_id": "Integer",
+        "total_seats": "Integer",
+        "available_seats": "Integer",
+        "occupied_seats": "Array of seat objects",
+        "layout": "Object (theater layout information)"
+      }
+    },
+    {
+      "path": "/api/screenings/{id}/seats",
+      "method": "POST",
+      "description": "Select a seat in a screening",
+      "authentication": "Required (Visitor Token)",
+      "request": {
+        "row_number": "Integer (required)",
+        "seat_number": "Integer (required)"
+      },
+      "response": {
+        "success": "Boolean",
+        "message": "String",
+        "seat": "Seat object if successful"
+      }
+    },
+    {
+      "path": "/api/screenings/{id}/seats/release",
+      "method": "POST",
+      "description": "Release a previously selected seat",
+      "authentication": "Required (Visitor Token)",
+      "response": {
+        "success": "Boolean",
+        "message": "String"
+      }
+    }
+  ]
+}

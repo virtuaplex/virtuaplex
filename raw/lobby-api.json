@@ -1,0 +1,97 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/lobbies",
+      "method": "GET",
+      "description": "List all active lobbies",
+      "query_params": {
+        "theater_id": "Integer (optional)",
+        "schedule_id": "Integer (optional)"
+      },
+      "response": {
+        "lobbies": "Array of lobby objects"
+      }
+    },
+    {
+      "path": "/api/lobbies/{id}",
+      "method": "GET",
+      "description": "Get a specific lobby by ID",
+      "response": {
+        "id": "Integer",
+        "theater_id": "Integer",
+        "theater_name": "String",
+        "schedule_id": "Integer",
+        "film_id": "Integer",
+        "film_title": "String",
+        "current_capacity": "Integer",
+        "max_capacity": "Integer",
+        "created_at": "Timestamp",
+        "is_active": "Boolean",
+        "start_time": "Timestamp",
+        "end_time": "Timestamp"
+      }
+    },
+    {
+      "path": "/api/lobbies/{id}/seats",
+      "method": "GET",
+      "description": "Get all seats in a lobby",
+      "response": {
+        "lobby_id": "Integer",
+        "max_capacity": "Integer",
+        "current_capacity": "Integer",
+        "seats": "Array of seat objects"
+      }
+    },
+    {
+      "path": "/api/lobbies/{id}/join",
+      "method": "POST",
+      "description": "Join a lobby (select a seat)",
+      "authentication": "Required",
+      "request": {
+        "row_number": "Integer (required)",
+        "seat_number": "Integer (required)"
+      },
+      "response": {
+        "success": "Boolean",
+        "message": "String",
+        "seat": "Seat object if successful",
+        "webrtc_info": "WebRTC connection information for the movie stream"
+      }
+    },
+    {
+      "path": "/api/lobbies/{id}/leave",
+      "method": "POST",
+      "description": "Leave a lobby (release a seat)",
+      "authentication": "Required",
+      "response": {
+        "success": "Boolean",
+        "message": "String"
+      }
+    },
+    {
+      "path": "/api/lobbies/{id}/chat",
+      "method": "GET",
+      "description": "Get chat messages from a lobby",
+      "authentication": "Required",
+      "query_params": {
+        "since": "Timestamp (optional)"
+      },
+      "response": {
+        "messages": "Array of chat message objects"
+      }
+    },
+    {
+      "path": "/api/lobbies/{id}/chat",
+      "method": "POST",
+      "description": "Send a chat message to a lobby",
+      "authentication": "Required",
+      "request": {
+        "message": "String (required)"
+      },
+      "response": {
+        "success": "Boolean",
+        "message_id": "Integer"
+      }
+    }
+  ]
+}

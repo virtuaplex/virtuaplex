@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "description": "Format for recurring schedule patterns",
+  "examples": [
+    {
+      "frequency": "daily",
+      "interval": 1,
+      "end_date": "2025-12-31"
+    },
+    {
+      "frequency": "weekly",
+      "interval": 1,
+      "day_of_week": [1, 3, 5],
+      "end_date": "2025-12-31"
+    },
+    {
+      "frequency": "monthly",
+      "interval": 1,
+      "day_of_month": 15,
+      "end_date": "2025-12-31"
+    }
+  ]
+}

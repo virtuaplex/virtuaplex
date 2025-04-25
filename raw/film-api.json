@@ -1,0 +1,146 @@
+{
+  "endpoints": [
+    {
+      "path": "/api/films",
+      "method": "GET",
+      "description": "List all films",
+      "query_params": {
+        "page": "Integer (optional, default: 1)",
+        "limit": "Integer (optional, default: 20)",
+        "sort_by": "String (optional, default: 'added_at')",
+        "order": "String (optional, default: 'desc')",
+        "genre": "String (optional)",
+        "year": "Integer (optional)",
+        "is_public_domain": "Boolean (optional)"
+      },
+      "response": {
+        "total": "Integer",
+        "page": "Integer",
+        "limit": "Integer",
+        "films": "Array of film objects"
+      }
+    },
+    {
+      "path": "/api/films/{id}",
+      "method": "GET",
+      "description": "Get a specific film by ID",
+      "response": {
+        "id": "Integer",
+        "title": "String",
+        "description": "String",
+        "release_year": "Integer",
+        "duration_minutes": "Integer",
+        "magnet_link": "String",
+        "poster_url": "String",
+        "genre": "String",
+        "director": "String",
+        "is_public_domain": "Boolean",
+        "added_by": "Object (operator information)",
+        "added_at": "Timestamp",
+        "metadata": "Array of key-value pairs"
+      }
+    },
+    {
+      "path": "/api/films",
+      "method": "POST",
+      "description": "Add a new film",
+      "authentication": "Required (Operator)",
+      "request": {
+        "title": "String (required)",
+        "description": "String (optional)",
+        "release_year": "Integer (optional)",
+        "duration_minutes": "Integer (required)",
+        "magnet_link": "String (required)",
+        "poster_url": "String (optional)",
+        "genre": "String (optional)",
+        "director": "String (optional)",
+        "is_public_domain": "Boolean (optional, default: true)",
+        "metadata": "Array of key-value pairs (optional)"
+      },
+      "response": {
+        "id": "Integer",
+        "title": "String",
+        "description": "String",
+        "release_year": "Integer",
+        "duration_minutes": "Integer",
+        "magnet_link": "String",
+        "poster_url": "String",
+        "genre": "String",
+        "director": "String",
+        "is_public_domain": "Boolean",
+        "added_by": "Object (operator information)",
+        "added_at": "Timestamp",
+        "metadata": "Array of key-value pairs"
+      }
+    },
+    {
+      "path": "/api/films/{id}",
+      "method": "PUT",
+      "description": "Update a film",
+      "authentication": "Required (Operator)",
+      "request": {
+        "title": "String (optional)",
+        "description": "String (optional)",
+        "release_year": "Integer (optional)",
+        "duration_minutes": "Integer (optional)",
+        "magnet_link": "String (optional)",
+        "poster_url": "String (optional)",
+        "genre": "String (optional)",
+        "director": "String (optional)",
+        "is_public_domain": "Boolean (optional)",
+        "metadata": "Array of key-value pairs (optional)"
+      },
+      "response": {
+        "id": "Integer",
+        "title": "String",
+        "description": "String",
+        "release_year": "Integer",
+        "duration_minutes": "Integer",
+        "magnet_link": "String",
+        "poster_url": "String",
+        "genre": "String",
+        "director": "String",
+        "is_public_domain": "Boolean",
+        "added_by": "Object (operator information)",
+        "added_at": "Timestamp",
+        "metadata": "Array of key-value pairs"
+      }
+    },
+    {
+      "path": "/api/films/{id}",
+      "method": "DELETE",
+      "description": "Delete a film",
+      "authentication": "Required (Operator)",
+      "response": {
+        "success": "Boolean",
+        "message": "String"
+      }
+    },
+    {
+      "path": "/api/films/{id}/metadata",
+      "method": "POST",
+      "description": "Add metadata to a film",
+      "authentication": "Required (Operator)",
+      "request": {
+        "key": "String (required)",
+        "value": "String (required)"
+      },
+      "response": {
+        "id": "Integer",
+        "film_id": "Integer",
+        "key": "String",
+        "value": "String"
+      }
+    },
+    {
+      "path": "/api/films/{id}/metadata/{metadata_id}",
+      "method": "DELETE",
+      "description": "Delete film metadata",
+      "authentication": "Required (Operator)",
+      "response": {
+        "success": "Boolean",
+        "message": "String"
+      }
+    }
+  ]
+}
